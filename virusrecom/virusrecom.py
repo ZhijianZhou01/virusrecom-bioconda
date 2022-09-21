@@ -886,95 +886,96 @@ if __name__ == "__main__":
 
         parser.add_argument(
             "-a", dest="alignment",
-            help="FilePath of an aligned sequence set(*.fasta format) containing all sequences used for analysis, then the alignment will be skipped. Default is null. If using, name of each sequence in aligned sequence set requires containing the mark(a unique string) of the lineage.",
+            help="FilePath of an aligned sequence set (*.fasta format) containing all sequences used for analysis, then the sequence alignment will be skipped. Default value is null. If “-a” parameter was used, the name of each sequence in aligned sequence set requires containing the mark (a unique string) of the lineage.",
             default="")
 
 
         parser.add_argument(
             "-q", dest = "query",
-            help="FilePath of query lineage (potential recombinant, *.fasta format). Note, if the '-a alignment' has been used, please enter the mark (a unique string) of queried recombinant here, such as '-q XE_'(not a FilePath), besides, using '-q auto' and all sequences will be scanned as potential recombinants in turn.",
+            help="FilePath of query lineage (usually potential recombinant, *.fasta format). Note, if the ‘-a’ parameter has been used, please enter the mark (a unique string) of query lineage here, such as ‘-q xxxx’, not a FilePath. Using ‘-q auto’ and all lineages will be scanned as potential recombinants in turn.",
             default="")
 
 
         parser.add_argument(
             "-l", dest="lineage",
-            help="DirPath of reference lineages. One sequence file (*.fasta format) per lineage, and each lineage could contain multiple sequences. Note, if the '-a alignment' has been used, please enter a text file containing the marks (a unique string) of lineages here, not a DirPath.",
+            help="DirPath of reference lineages. One sequence file (*.fasta format) per lineage, and each lineage could contain multiple sequences. Note, if the ‘-a’ parameter has been used, please enter a file path of a text file containing the mark (a unique string) of lineage here, not a DirPath.",
             default="/home")
 
 
         parser.add_argument("-g", dest="gap",
-                            help="Gaps (-) in the alignment were used in analysis? '-g y': reserve gaps, '-g n': delete gaps.",
+                            help="Gaps (-) in the alignment were used in analysis? ‘-g y’ means to reserve gaps, and ‘-g n’ means to delete gaps.",
                             type=str,
                             default="n")
 
 
         parser.add_argument("-m", dest="method",
-                            help="Scanning method of recombination analysis. '-m p': using polymorphic sites only, '-m a': using all the monomorphic sites and polymorphic sites.",
+                            help="Scanning method of recombination analysis. ‘-m p’ means use polymorphic sites only, ‘-m a’ means all the monomorphic sites and polymorphic sites.",
                             type=str,
                             default="p")
 
 
         parser.add_argument("-w", dest="window",
-                            help="Number of nt sites per sliding window. Note: if the '-m p' method has been used, -w refers to the number of polymorphic sites per windows.",
+                            help="Number of nucleotides sites per sliding window. Note: if the ‘-m p’ has been used, -w refers to the number of polymorphic sites per windows.",
                             type=int,
                             default=100)
 
         parser.add_argument("-s", dest="step",
-                            help="Step size for scanning these sites. Note: if the '-m p' method has been used, -w refers to the number of polymorphic sites per jump.",
+                            help="Step size of the sliding window. Note: if the ‘-m p’ has been used, -s refers to the number of polymorphic sites per jump.",
                             type=int,
                             default=20)
 
         # max_recom_fragment
         parser.add_argument("-mr", dest="max_region",
-                            help="The maximum allowed recombination region. Note: if the '-m p' method has been used, it refers the maximum number of polymorphic sites contained in a recombinant region.",
+                            help="The maximum allowed recombination region. Note: if the ‘-m p’ method has been used, it refers the maximum number of polymorphic sites contained in a recombinant region.",
                             type=int,
                             default=1000)
 
         parser.add_argument("-cp", dest="percentage",
-                            help="The cutoff threshold of proportion (cp, default was 0.9) for searching recombination regions when mWIC/EIC >= cp, the maximum value of cp is 1. For  detection in genus level, about 0.5 is recommended.",
+                            help="The cutoff threshold of proportion (cp, default value was 0.9) used for searching recombination regions when mWIC/EIC >= cp, the maximum value of cp is 1.",
                             type=float,
                             default=0.9)
 
         parser.add_argument("-cm", dest="calibrate",
-                            help="Whether to simply use the max cumulative WIC of sites to identified major parent. The default value is 'n' and means 'no'. If required, specify ‘-cm y’.",
+                            help="Whether to simply use the max cumulative WIC of all sites to identified the major parent. The default value is ‘n’ and means ‘no’. If required, please specify ‘-cm y’.",
                             type=str,
                             default="n")
 
 
         parser.add_argument("-b", dest="breakpoint",
-                            help="Whether to run the breakpoint scan of recombination. ‘-b y’: yes, ‘-b n’: no. Note: this option only takes effect when '-m p' has been specified!",
+                            help="Whe ther to run the breakpoint scan of recombination. ‘-b y’ means yes, ‘-b n’ means no. Note: this option only takes effect when ‘-m p’ has been specified.",
                             type=str,
                             default="n")
 
 
         parser.add_argument("-bw", dest="breakwin",
-                            help="The window size (polymorphic sites, default is 200) used for breakpoint scan. The step size is fixed at 1. Note: this option only takes effect when '-m p -b y' has been specified!",
+                            help="The window size (polymorphic sites, default value is 200) used for breakpoint scan. The step size is fixed at 1. Note: this option only takes effect when ‘-m p -b y’ has been specified.",
                             type=int,
                             default=200)
 
 
         parser.add_argument(
             "-o", dest="outdir",
-            help="The outdir of results.",
+            help="The path of the outdir of results.",
             type=str,
             default="/home")
 
         parser.add_argument(
             "-t", dest="thread",
-            help="Number of threads used for the multiple sequence alignments (MSA), default is 1.",
+            help="Number of threads used for the multiple sequence alignments (MSA), the default value is 1.",
             type=int,
             default=1)
 
 
         parser.add_argument(
             "-y", dest="y_start",
-            help="Specify the starting value of the Y axis in the picture, the default is 0.",
+            help="Specify the starting value of the Y-axis scale in the picture, the default value is 0.",
             type=float,
             default=0.0)
 
         myargs = parser.parse_args(sys.argv[1:])
 
         return myargs
+
 
     myargs = parameter()
 
